@@ -20,9 +20,9 @@ public abstract class Item {
     @Column(name = "item_id")
     private Long id;
 
-    private String name;
-    private int price;
-    private int stockQuantity;
+    protected String name;
+    protected int price;
+    protected int stockQuantity;
 
     @ManyToMany(mappedBy = "items")
     private List<Category> categories = new ArrayList<>();

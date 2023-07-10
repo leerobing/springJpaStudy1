@@ -26,15 +26,10 @@ public class ItemController {
 
     @PostMapping("/items/new")
     public String creat(BookForm bookForm ) {
-        Book book = new Book();
-        book.setName(bookForm.getName());
-        book.setPrice(bookForm.getPrice());
-        book.setStockQuantity(bookForm.getStockQuantity());
-        book.setAuthor(bookForm.getAuthor());
-        book.setIsbn(bookForm.getIsbn());
-
+        Book book = Book.craetBook(bookForm);
         itemService.itemSave(book);
-        return "redirect:/";
+
+        return "redirect:/items";
 
     }
 
