@@ -4,9 +4,12 @@ import jpabook.jpashop.domain.item.Book;
 import jpabook.jpashop.domain.item.Item;
 import jpabook.jpashop.service.ItemService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
@@ -39,6 +42,24 @@ public class ItemController {
         model.addAttribute("items",items);
         return "items/itemList";
     }
+
+    @GetMapping("items/{itemId}/edit")
+    public String updateItemForm(@PathVariable("itemId") Long itemId, Model model) {
+
+        Book item = (Book) itemService.findOne(itemId);
+        BookForm form = BookForm.creatBookForm(item);
+        model.addAttribute("form",form);
+        return "items/updateItemForm";
+    }
+
+    @PostMapping("items/{itemId}/edit")
+    public String updateItem(@ModelAttribute("form") BookForm bookForm, @PathVariable("itemId") Long itemId) {
+        Book book = Book.craetBook(bookForm);
+        itemService.updateItem(itemId,book);
+
+        return "redirect:/items";
+    }
+
 
 
 }

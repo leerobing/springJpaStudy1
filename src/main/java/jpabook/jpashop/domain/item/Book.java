@@ -19,6 +19,7 @@ public class Book extends Item {
 
   public static Book craetBook(BookForm bookForm) {
    Book book = new Book();
+   book.id = bookForm.getId();
    book.name = bookForm.getName();
    book.price = bookForm.getPrice();
    book.stockQuantity = bookForm.getStockQuantity();

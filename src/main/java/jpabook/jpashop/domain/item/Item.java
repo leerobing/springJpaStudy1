@@ -18,7 +18,7 @@ public abstract class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "item_id")
-    private Long id;
+    protected Long id;
 
     protected String name;
     protected int price;
@@ -45,4 +45,14 @@ public abstract class Item {
         this.stockQuantity = restStock;
     }
 
+    /**
+     * 업데이트 시 수정 로직
+    * */
+    public Item change(Item param) {
+        this.id = param.getId();
+        this.name = param.getName();
+        this.price = param.getPrice();
+        this.stockQuantity = getStockQuantity();
+        return this;
+    }
 }
